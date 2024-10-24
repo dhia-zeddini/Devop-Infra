@@ -28,7 +28,7 @@ module "network" {
 
 # # SonarQube container
 module "sonarqube" {
-  source = "./docker/sonar"  # Path to your SonarQube module or configuration
+  source = "./docker/sonarqube"  # Path to your SonarQube module or configuration
 }
 
 # # Nexus container
