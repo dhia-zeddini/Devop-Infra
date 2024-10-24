@@ -62,8 +62,8 @@ resource "docker_container" "hello-world" {
   }
 }
 resource "docker_container" "nexus" {
-  image = "nginx"
-  name  = "nginx"
+  image = "nexus"
+  name  = "test"
   networks_advanced {
     name = docker_network.app_network.name
   }
