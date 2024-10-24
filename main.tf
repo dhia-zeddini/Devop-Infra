@@ -19,7 +19,18 @@
 #     path = "terraform.tfstate"
 #   }
 # }
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
+    }
+  }
+}
 
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
 # Create the Docker network
 module "network" {
   source = "./docker/network"  # Path to your network module or configuration
