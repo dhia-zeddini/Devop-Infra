@@ -50,9 +50,9 @@ resource "docker_network" "app_network" {
   name = "app_network"
 }
 
-resource "docker_container" "hello-world" {
-  image = "hello-world"
-  name  = "hello-world"
+resource "docker_container" "sonarqube" {
+  image = "sonarqube:9.9.1-community"
+  name  = "sonn"
   networks_advanced {
     name = docker_network.app_network.name
   }
@@ -61,17 +61,17 @@ resource "docker_container" "hello-world" {
     external = 9002
   }
 }
-resource "docker_container" "nexus" {
-  image = "sonatype/nexus3"
-  name  = "test"
-  networks_advanced {
-    name = docker_network.app_network.name
-  }
-  ports {
-    internal = 8085
-    external = 8085
-  }
-}
+# resource "docker_container" "nexus" {
+#   image = "sonatype/nexus3"
+#   name  = "test"
+#   networks_advanced {
+#     name = docker_network.app_network.name
+#   }
+#   ports {
+#     internal = 8085
+#     external = 8085
+#   }
+# }
 
 # output "sonarqube_url" {
 #   value = module.sonarqube.sonarqube_url
