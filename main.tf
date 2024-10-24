@@ -62,7 +62,7 @@ resource "docker_container" "hello-world" {
   }
 }
 resource "docker_container" "nexus" {
-  image = "nexus"
+  image = "sonatype/nexus3"
   name  = "test"
   networks_advanced {
     name = docker_network.app_network.name
