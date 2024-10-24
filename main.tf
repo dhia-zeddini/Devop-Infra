@@ -22,18 +22,18 @@
 
 # Create the Docker network
 module "network" {
-  source = "./docker/network.tf"  # Path to your network module or configuration
+  source = "./docker/network"  # Path to your network module or configuration
 }
 
 
 # # SonarQube container
 module "sonarqube" {
-  source = "./docker/sonar.tf"  # Path to your SonarQube module or configuration
+  source = "./docker/sonar"  # Path to your SonarQube module or configuration
 }
 
 # # Nexus container
 module "nexus" {
-  source = "./docker/nexus.tf"  # Path to your Nexus module or configuration
+  source = "./docker/nexus"  # Path to your Nexus module or configuration
 }
 
 
