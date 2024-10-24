@@ -57,7 +57,7 @@ resource "docker_container" "sonarqube" {
     name = docker_network.app_network.name
   }
   ports {
-    internal = 9002
+    internal = 9000
     external = 9002
   }
 }
