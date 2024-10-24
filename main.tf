@@ -20,21 +20,21 @@
 #   }
 # }
 
-# Create the Docker network
-module "network" {
-  source = "./docker/network"  # Path to your network module or configuration
-}
+# # Create the Docker network
+# module "network" {
+#   source = "./docker/network"  # Path to your network module or configuration
+# }
 
 
-# # SonarQube container
-module "sonarqube" {
-  source = "./docker/sonarqube"  # Path to your SonarQube module or configuration
-}
+# # # SonarQube container
+# module "sonarqube" {
+#   source = "./docker/sonarqube"  # Path to your SonarQube module or configuration
+# }
 
-# # Nexus container
-module "nexus" {
-  source = "./docker/nexus"  # Path to your Nexus module or configuration
-}
+# # # Nexus container
+# module "nexus" {
+#   source = "./docker/nexus"  # Path to your Nexus module or configuration
+# }
 
 
 # output "sonarqube_url" {
