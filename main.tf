@@ -50,7 +50,7 @@ resource "docker_network" "app_network" {
   name = "app_network"
 }
 
-resource "docker_container" "sonarqube" {
+resource "docker_container" "hello-world" {
   image = "hello-world"
   name  = "hello-world"
   networks_advanced {
