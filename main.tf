@@ -46,6 +46,9 @@ provider "docker" {
 # module "nexus" {
 #   source = "./docker/nexus"  # Path to your Nexus module or configuration
 # }
+resource "docker_network" "app_network" {
+  name = "app_network"
+}
 
 resource "docker_container" "sonarqube" {
   image = "hello-world"
@@ -56,6 +59,17 @@ resource "docker_container" "sonarqube" {
   ports {
     internal = 9002
     external = 9002
+  }
+}
+resource "docker_container" "nexus" {
+  image = "nginx"
+  name  = "nginx"
+  networks_advanced {
+    name = docker_network.app_network.name
+  }
+  ports {
+    internal = 8085
+    external = 8085
   }
 }
 
