@@ -32,21 +32,32 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 # Create the Docker network
-module "network" {
-  source = "./docker/network"  # Path to your network module or configuration
+# module "network" {
+#   source = "./docker/network"  # Path to your network module or configuration
+# }
+
+
+# # # SonarQube container
+# module "sonarqube" {
+#   source = "./docker/sonarqube"  # Path to your SonarQube module or configuration
+# }
+
+# # # Nexus container
+# module "nexus" {
+#   source = "./docker/nexus"  # Path to your Nexus module or configuration
+# }
+
+resource "docker_container" "sonarqube" {
+  image = "hello-world"
+  name  = "hello-world"
+  networks_advanced {
+    name = docker_network.app_network.name
+  }
+  ports {
+    internal = 9002
+    external = 9002
+  }
 }
-
-
-# # SonarQube container
-module "sonarqube" {
-  source = "./docker/sonarqube"  # Path to your SonarQube module or configuration
-}
-
-# # Nexus container
-module "nexus" {
-  source = "./docker/nexus"  # Path to your Nexus module or configuration
-}
-
 
 # output "sonarqube_url" {
 #   value = module.sonarqube.sonarqube_url
