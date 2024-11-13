@@ -12,14 +12,31 @@ resource "docker_container" "container" {
     internal = var.container_port[count.index]
     external = var.container_port[count.index]
   }
- mounts {
-   source = docker_volume.shared_volume[count.index].name
-   target = var.target_volumes[count.index]
-   type = "volume"
- }
- lifecycle {
-   
- }
+  mounts {
+    source = docker_volume.shared_volume[count.index].name
+    target = var.target_volumes[count.index]
+    type   = "volume"
+  }
+
+  # Add specific configuration for Prometheus
+  dynamic "command" {
+    for_each = [for i in var.container_name : i if i == "prometheus"]
+    content {
+      command = [
+        "--config.file=/etc/prometheus/prometheus.yml"
+      ]
+    }
+  }
+
+  # Mount the prometheus.yml file
+  dynamic "mounts" {
+    for_each = [for i in var.container_name : i if i == "prometheus"]
+    content {
+      source = "${path.module}/prometheus.yml"  
+      target = "/etc/prometheus/prometheus.yml"
+      type   = "bind"
+    }
+  }
 }
 
 resource "docker_network" "network" {
