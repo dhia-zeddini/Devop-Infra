@@ -17,6 +17,9 @@ resource "docker_container" "container" {
    target = var.target_volumes[count.index]
    type = "volume"
  }
+ lifecycle {
+   
+ }
 }
 
 resource "docker_network" "network" {
@@ -31,7 +34,4 @@ resource "docker_image" "image" {
 resource "docker_volume" "shared_volume" {
   count = 4  
   name = var.container_volumes[count.index]
-  lifecycle {
-    prevent_destroy = true
-  }
 }
