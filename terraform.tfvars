@@ -1,6 +1,6 @@
 image_name = [
   "sonatype/nexus3:3.39.0",  
-  "sonarqube",                 
+  "sonarqube:9.9.1-community ",                 
   "grafana/grafana",         
   "prom/prometheus"        
 ]
