@@ -1,7 +1,7 @@
 resource "docker_container" "container" {
   depends_on = [ docker_network.network ,docker_image.image ]
   count = 2
-  image = docker_image.image.id[count.index]
+  image = docker_image.image.name[count.index]
   name  = var.container_name[count.index]
   networks_advanced {
     name = docker_network.network.name
