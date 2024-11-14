@@ -35,7 +35,7 @@ resource "docker_container" "prometheus" {
   }
 
   mounts {
-    source = "${path.root}/prometheus.yml"
+    source = "/var/jenkins_home/workspace/infra/prometheus.yml"
     target = "/etc/prometheus/prometheus.yml"
     type   = "bind"
   }
