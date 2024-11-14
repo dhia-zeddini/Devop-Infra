@@ -25,4 +25,4 @@ container_port = [
   9000,  
   3000,  
 ]
-network_name = "infra-network"
+network_name = "dev-network"
