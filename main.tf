@@ -35,4 +35,7 @@ resource "docker_image" "image" {
 resource "docker_volume" "shared_volume" {
   count = 3  
   name  = var.container_volumes[count.index]
+  lifecycle {
+    prevent_destroy = true  
+  }
 }
