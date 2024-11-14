@@ -34,3 +34,17 @@ resource "docker_container" "container" {
     }
   }
 }
+
+resource "docker_network" "network" {
+  name = var.network_name
+}
+
+resource "docker_image" "image" {
+  count = 4  
+  name  = var.image_name[count.index]
+  keep_locally = true
+}
+resource "docker_volume" "shared_volume" {
+  count = 4  
+  name = var.container_volumes[count.index]
+}
