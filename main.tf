@@ -18,17 +18,10 @@ resource "docker_container" "container" {
     type   = "volume"
   }
 
-  # Add specific configuration for Prometheus
-  dynamic "command" {
-    for_each = [for i in var.container_name : i if i == "prometheus"]
-    content {
-      command = [
-        "--config.file=/etc/prometheus/prometheus.yml"
-      ]
-    }
-  }
+  command = var.container_name[count.index] == "prometheus" ? [
+    "--config.file=/etc/prometheus/prometheus.yml"
+  ] : []
 
-  # Mount the prometheus.yml file
   dynamic "mounts" {
     for_each = [for i in var.container_name : i if i == "prometheus"]
     content {
