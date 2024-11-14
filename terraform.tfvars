@@ -15,13 +15,11 @@ container_volumes = [
   "nexus-data",
   "sonarqube-data",
   "grafana-data",
-  "./prometheus.yml"
 ]
 target_volumes = [
   "/nexus-data",
   "/opt/sonarqube/data",
   "/var/lib/grafana",
-  "/etc/prometheus/prometheus.yml"
 ]
 
 container_port = [
