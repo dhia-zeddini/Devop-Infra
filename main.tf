@@ -12,23 +12,13 @@ resource "docker_container" "container" {
     internal = var.container_port[count.index]
     external = var.container_port[count.index]
   }
+  command = var.container_name[count.index] == "prometheus" ? [
+    "--config.file=/etc/prometheus/prometheus.yml"
+  ] : []
   mounts {
     source = docker_volume.shared_volume[count.index].name
     target = var.target_volumes[count.index]
     type   = "volume"
-  }
-
-  command = var.container_name[count.index] == "prometheus" ? [
-    "--config.file=/etc/prometheus/prometheus.yml"
-  ] : []
-
-  dynamic "mounts" {
-    for_each = [for i in var.container_name : i if i == "prometheus"]
-    content {
-      source = "${path.module}/prometheus.yml"  
-      target = "/etc/prometheus/prometheus.yml"
-      type   = "bind"
-    }
   }
 }
 
