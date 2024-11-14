@@ -20,33 +20,14 @@ resource "docker_container" "container" {
   }
 }
 
-resource "docker_container" "prometheus" {
-  depends_on = [docker_network.network, docker_image.image]
-  image      = docker_image.image[3].name
-  name       = var.container_name[3]
 
-  networks_advanced {
-    name = docker_network.network.name
-  }
-
-  ports {
-    internal = var.container_port[3]
-    external = var.container_port[3]
-  }
-
-  mounts {
-    source = "${abspath(path.module)}/prometheus.yml"
-    target = "/etc/prometheus/prometheus.yml"
-    type   = "bind"
-  }
-}
 
 resource "docker_network" "network" {
   name = var.network_name
 }
 
 resource "docker_image" "image" {
-  count        = 4  
+  count        = 3  
   name         = var.image_name[count.index]
   keep_locally = true
 }
